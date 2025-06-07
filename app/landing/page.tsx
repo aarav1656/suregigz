@@ -2,7 +2,7 @@
 "use client"
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export default function Home() {
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false);
@@ -35,7 +35,7 @@ export default function Home() {
     }
   };
   
-  const glowPulse = {
+  const glowPulse: Variants = {
     initial: { 
       textShadow: "0 0 8px rgba(255, 0, 255, 0.7), 0 0 12px rgba(255, 0, 255, 0.5)" 
     },
@@ -61,7 +61,7 @@ export default function Home() {
     }
   };
   
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsEmailSubmitted(true);
     setTimeout(() => setIsEmailSubmitted(false), 3000);
@@ -161,6 +161,7 @@ export default function Home() {
                 variants={glowPulse}
                 initial="initial"
                 animate="animate"
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
               >
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-cyan-400">
                   suregigz
@@ -216,8 +217,8 @@ export default function Home() {
                     transition={{ duration: 2, repeat: Infinity }}
                   >
                     <div className="text-green-400 mb-2">~ Smart Contract Created</div>
-                    <div className="text-purple-300 mb-2">> Client escrow funds locked: 1.5 ETH</div>
-                    <div className="text-cyan-400 mb-2">> Freelancer agreement confirmed</div>
+                    <div className="text-purple-300 mb-2"> Client escrow funds locked: 1.5 ETH</div>
+                    <div className="text-cyan-400 mb-2"> Freelancer agreement confirmed</div>
                     <div className="text-pink-400">
                       <motion.span 
                         animate={{ opacity: [0, 1] }}
