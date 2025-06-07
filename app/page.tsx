@@ -6,6 +6,8 @@ import { motion, Variants } from 'framer-motion';
 
 export default function Home() {
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
   
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -61,10 +63,59 @@ export default function Home() {
     }
   };
   
-  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsEmailSubmitted(true);
-    setTimeout(() => setIsEmailSubmitted(false), 3000);
+    setIsSubmitting(true);
+    setSubmitMessage('');
+    
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const role = formData.get('role') as string;
+    
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, role }),
+      });
+      
+      if (!response.ok) {
+        // Try to get error message from response
+        let errorMessage = 'Something went wrong. Please try again.';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // If can't parse JSON, use status text
+          errorMessage = `Server error: ${response.status} ${response.statusText}`;
+        }
+        setSubmitMessage(errorMessage);
+        return;
+      }
+
+      // Parse successful response - we don't need the data, just confirm success
+      await response.json();
+      setIsEmailSubmitted(true);
+      setSubmitMessage('Thanks! You\'re now on the waitlist 🎉');
+      e.currentTarget.reset();
+      setTimeout(() => {
+        setIsEmailSubmitted(false);
+        setSubmitMessage('');
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // More specific error handling
+      // if (error instanceof TypeError && error.message.includes('fetch')) {
+      //   setSubmitMessage('Unable to connect to server. Please check your internet connection.');
+      // } else {
+      //   setSubmitMessage('Network error. Please try again.');
+      // }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -487,8 +538,10 @@ export default function Home() {
                   <input 
                     type="email" 
                     id="email" 
+                    name="email"
                     required
-                    className="w-full bg-black bg-opacity-50 border border-purple-500/50 rounded px-4 py-3 font-['VT323'] text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    disabled={isSubmitting}
+                    className="w-full bg-black bg-opacity-50 border border-purple-500/50 rounded px-4 py-3 font-['VT323'] text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50"
                     placeholder="enter@your.email"
                   />
                 </div>
@@ -498,7 +551,9 @@ export default function Home() {
                   </label>
                   <select 
                     id="role" 
-                    className="w-full bg-black bg-opacity-50 border border-purple-500/50 rounded px-4 py-3 font-['VT323'] text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    name="role"
+                    disabled={isSubmitting}
+                    className="w-full bg-black bg-opacity-50 border border-purple-500/50 rounded px-4 py-3 font-['VT323'] text-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:opacity-50"
                   >
                     <option value="freelancer">Freelancer</option>
                     <option value="client">Client</option>
@@ -506,13 +561,25 @@ export default function Home() {
                     <option value="other">Other</option>
                   </select>
                 </div>
+                
+                {submitMessage && (
+                  <div className={`mb-4 p-3 rounded font-['VT323'] text-lg ${
+                    isEmailSubmitted 
+                      ? 'bg-green-900/30 border border-green-500/30 text-green-400' 
+                      : 'bg-red-900/30 border border-red-500/30 text-red-400'
+                  }`}>
+                    {submitMessage}
+                  </div>
+                )}
+                
                 <motion.button 
                   type="submit"
-                  className="w-full font-['Press_Start_2P'] text-sm mt-4 px-6 py-3 rounded-md bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={isSubmitting}
+                  className="w-full font-['Press_Start_2P'] text-sm mt-4 px-6 py-3 rounded-md bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 >
-                  {isEmailSubmitted ? "Thanks! You're on the list" : "Get Early Access"}
+                  {isSubmitting ? "Submitting..." : (isEmailSubmitted ? "Thanks! You're on the list" : "Get Early Access")}
                 </motion.button>
               </form>
             </motion.div>
@@ -529,6 +596,7 @@ export default function Home() {
               y: { duration: 5, repeat: Infinity, repeatType: "reverse" },
               rotate: { duration: 20, repeat: Infinity, ease: "linear" }
             }}
+            
             style={{
               background: 'radial-gradient(circle, rgba(157, 0, 255, 0.8) 0%, rgba(157, 0, 255, 0) 70%)'
             }}
