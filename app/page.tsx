@@ -95,8 +95,14 @@ export default function Home() {
         return;
       }
 
-      // Parse successful response - we don't need the data, just confirm success
-      await response.json();
+      // Parse successful response - handle potential JSON parsing errors
+      try {
+        await response.json();
+      } catch (jsonError) {
+        console.warn('Response was successful but JSON parsing failed:', jsonError);
+        // Still treat as success since the HTTP response was OK
+      }
+      
       setIsEmailSubmitted(true);
       setSubmitMessage('Thanks! You\'re now on the waitlist 🎉');
       e.currentTarget.reset();
@@ -108,11 +114,9 @@ export default function Home() {
     } catch (error) {
       console.error('Error submitting form:', error);
       // More specific error handling
-      // if (error instanceof TypeError && error.message.includes('fetch')) {
-      //   setSubmitMessage('Unable to connect to server. Please check your internet connection.');
-      // } else {
-      //   setSubmitMessage('Network error. Please try again.');
-      // }
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        setSubmitMessage('Unable to connect to server. Please check your internet connection.');
+      } 
     } finally {
       setIsSubmitting(false);
     }
