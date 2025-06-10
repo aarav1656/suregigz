@@ -503,7 +503,7 @@ export default function Home() {
                 </p>
               </motion.div>
             </motion.div>
-          </div>
+        </div>
         </section>
         
         {/* CTA Section */}
@@ -670,7 +670,7 @@ export default function Home() {
           <div className="text-center mt-8 font-['VT323'] text-purple-500 text-sm">
             © 2025 suregigz. All rights reserved.
           </div>
-        </footer>
+      </footer>
       </div>
     </div>
   );

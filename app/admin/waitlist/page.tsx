@@ -71,21 +71,63 @@ export default function AdminWaitlist() {
   };
 
   const downloadCSV = () => {
-    const headers = ['Email', 'Role', 'Timestamp'];
-    const csvContent = [
-      headers.join(','),
-      ...waitlist.map(entry => 
-        [entry.email, entry.role, entry.timestamp].join(',')
-      )
-    ].join('\n');
+    try {
+      if (waitlist.length === 0) {
+        alert('No data to download');
+        return;
+      }
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `waitlist-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
+      // Escape CSV values and handle special characters
+      const escapeCSV = (value: string) => {
+        if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+          return `"${value.replace(/"/g, '""')}"`;
+        }
+        return value;
+      };
+
+      const headers = ['Email', 'Role', 'Timestamp'];
+      const csvRows = [
+        headers.join(','),
+        ...waitlist.map(entry => [
+          escapeCSV(entry.email),
+          escapeCSV(entry.role),
+          escapeCSV(new Date(entry.timestamp).toLocaleString())
+        ].join(','))
+      ];
+      
+      const csvContent = csvRows.join('\n');
+      const BOM = '\uFEFF'; // Add BOM for proper UTF-8 encoding
+      
+      // Create blob and download link
+      const blob = new Blob([BOM + csvContent], { 
+        type: 'text/csv;charset=utf-8;' 
+      });
+      
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      
+      // Set link properties
+      link.href = url;
+      link.download = `suregigz-waitlist-${new Date().toISOString().split('T')[0]}.csv`;
+      link.style.display = 'none';
+      
+      // Force download
+      document.body.appendChild(link);
+      link.click();
+      
+      // Cleanup
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      console.log('CSV download initiated successfully');
+      
+      // Show success message to user
+      alert('CSV file download started!');
+      
+    } catch (error) {
+      console.error('Error downloading CSV:', error);
+      alert('Failed to download CSV. Please try again.');
+    }
   };
 
   const logout = () => {
