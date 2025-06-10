@@ -88,8 +88,19 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    // Check for admin authentication
+    const adminKey = request.headers.get('x-admin-key');
+    const expectedAdminKey = process.env.ADMIN_KEY || 'admin123'; // Default for development
+    
+    if (!adminKey || adminKey !== expectedAdminKey) {
+      return NextResponse.json(
+        { error: 'Unauthorized access' },
+        { status: 401 }
+      );
+    }
+
     const waitlist = await readWaitlist();
     return NextResponse.json({ 
       count: waitlist.length, 
