@@ -645,7 +645,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
             >
               <motion.a 
-                href="#" 
+                href="https://x.com/suregigai" 
                 className="text-purple-400 hover:text-pink-400"
                 whileHover={{ scale: 1.2, rotate: 5 }}
               >
