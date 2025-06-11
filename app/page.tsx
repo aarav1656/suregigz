@@ -385,69 +385,47 @@ export default function Home() {
               </p>
             </motion.div>
             
-            <motion.div 
-              className="grid grid-cols-1 lg:grid-cols-2 gap-10"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ y: -5 }}
-              >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8">
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🔐</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Attestation-Based Agreements</h3>
+                  <span className="text-2xl mr-3">🔐</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">No More Broken Promises</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Smart contracts define and store job terms, ensuring transparency and accountability.
+                <p className="font-['VT323'] text-xl mt-2">
+                  Every job has a smart contract. The rules and payment are locked in, so everyone knows what to expect.
                 </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ y: -5 }}
-              >
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8">
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🤖</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">AI-Powered Work Evaluation</h3>
+                  <span className="text-2xl mr-3">🤖</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">AI Checks the Work</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  AI compares submitted work with the job description, generating relevance scores for objective feedback.
+                <p className="font-['VT323'] text-xl mt-2">
+                  AI reviews the finished work and compares it to the job description, so feedback is fast and fair.
                 </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ y: -5 }}
-              >
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8">
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🧑‍⚖️</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Decentralized Dispute Resolution</h3>
+                  <span className="text-2xl mr-3">🧑‍⚖️</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Disputes? Solved Together</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Verified validators (proven via ZKPass) and AI jointly resolve disputes with fairness and transparency.
+                <p className="font-['VT323'] text-xl mt-2">
+                  If there's a disagreement, a group of trusted validators and AI review the case—no more one-sided decisions.
                 </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ y: -5 }}
-              >
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8">
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">💸</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Escrow-Backed Payments</h3>
+                  <span className="text-2xl mr-3">💸</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Payment is Always Safe</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Client payments are locked in escrow and released only when work is validated or disputes are resolved.
+                <p className="font-['VT323'] text-xl mt-2">
+                  Client's money is held in escrow and only released when the work is done right or a dispute is resolved.
                 </p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
         
