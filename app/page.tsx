@@ -495,10 +495,10 @@ export default function Home() {
                 className="font-['Press_Start_2P'] text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                Join The Revolution
+                Join The Waitlist 
               </motion.h2>
               <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto">
-                Be among the first to experience the future of decentralized freelancing.
+              Get exclusive early access to a safer, smarter way to freelance.
               </p>
             </motion.div>
             
@@ -512,7 +512,7 @@ export default function Home() {
               <form onSubmit={handleEmailSubmit} className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-500/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm">
                 <div className="mb-4">
                   <label className="block font-['VT323'] text-xl mb-2" htmlFor="email">
-                    Your Email
+                    Email
                   </label>
                   <input 
                     type="email" 
@@ -537,7 +537,6 @@ export default function Home() {
                     <option value="freelancer">Freelancer</option>
                     <option value="client">Client</option>
                     <option value="validator">Validator</option>
-                    <option value="other">Other</option>
                   </select>
                 </div>
                 
@@ -609,7 +608,7 @@ export default function Home() {
                 suregigz
               </div>
               <div className="font-['VT323'] text-lg mt-2 text-purple-300">
-                Decentralized Freelancing Platform
+              freelance without fear on NEARProtocol
               </div>
             </motion.div>
             <motion.div 
