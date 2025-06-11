@@ -224,12 +224,13 @@ export default function Home() {
               </motion.h1>
               
               <motion.p 
-                className="font-['VT323'] text-2xl md:text-3xl mt-6 max-w-3xl mx-auto leading-relaxed text-purple-100"
+                className="font-['VT323'] text-3xl md:text-3xl mt-6 max-w-3xl mx-auto leading-relaxed text-purple-100"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                A decentralized freelancing platform that rebuilds trust through smart contracts, AI evaluation, and ZK-based dispute resolution.
+               Freelance without fear on NEARProtocol
+
               </motion.p>
               
               <motion.div 
@@ -271,9 +272,11 @@ export default function Home() {
                     animate={{ opacity: [1, 0.8, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <div className="text-green-400 mb-2">~ Smart Contract Created</div>
-                    <div className="text-purple-300 mb-2"> Client escrow funds locked: 1.5 ETH</div>
-                    <div className="text-cyan-400 mb-2"> Freelancer agreement confirmed</div>
+                    <div className="text-green-400 mb-2"> ~ 🔐 Smart contracts lock job terms & payments</div>
+                    <div className="text-purple-300 mb-2"> ~ 💰 Client escrow funds locked: 1.5 ETH</div>
+                    <div className="text-cyan-400 mb-2"> ~ 🤖 AI checks work for fairness</div>
+                    <div className="text-pink-400 mb-2"> ~ 🧑‍⚖️ Disputes solved by community & AI</div>
+                    <div className="text-yellow-400 mb-2"> ~ 💸 Payments released only when work is validated</div>
                     <div className="text-pink-400">
                       <motion.span 
                         animate={{ opacity: [0, 1] }}
