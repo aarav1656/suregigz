@@ -63,6 +63,14 @@ export default function Home() {
     }
   };
   
+  const problemIcons = [
+    "📦", // Mismatched expectations on deliverables
+    "⚖️", // Unfair dispute handling
+    "💸", // Payment insecurity for freelancers
+    "🕵️‍♂️", // Difficulty verifying professional expertise
+    "🏢", // Centralized arbitration with low transparency
+  ];
+  
   const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -313,12 +321,13 @@ export default function Home() {
               variants={fadeIn}
             >
               <motion.h2 
-                className="font-['Press_Start_2P'] text-2xl md:text-3xl text-red-500 mb-6"
+                className="font-['Press_Start_2P'] text-4xl md:text-3xl text-red-500 mb-6 "
                 whileHover={{ scale: 1.02 }}
+                
               >
-                ❌ Problem
+                ❌ Problems 
               </motion.h2>
-              <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto">
+              <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto ">
                 Traditional freelancing platforms face:
               </p>
             </motion.div>
@@ -344,7 +353,7 @@ export default function Home() {
                   whileHover={{ scale: 1.03 }}
                 >
                   <div className="font-['VT323'] text-xl flex items-start">
-                    <span className="text-red-500 mr-2">✗</span>
+                    <span className="text-red-400 text-2xl mr-3">{problemIcons[index]}</span>
                     <span>{problem}</span>
                   </div>
                 </motion.div>
