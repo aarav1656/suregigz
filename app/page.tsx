@@ -432,68 +432,53 @@ export default function Home() {
         {/* Benefits Section */}
         <section id="benefits" className="py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div 
-              className="text-center mb-16"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-            >
+            <div className="text-center mb-16">
               <motion.h2 
-                className="font-['Press_Start_2P'] text-2xl md:text-3xl text-yellow-400 mb-6"
+                className="font-['Press_Start_2P'] text-3xl md:text-4xl bg-gradient-to-r from-yellow-400 to-pink-400 text-transparent bg-clip-text drop-shadow-lg mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                🌟 Benefits
+                <span role="img" aria-label="star">🌟</span> Benefits
               </motion.h2>
-            </motion.div>
-            
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ scale: 1.05 }}
-              >
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Freelancers */}
+              <div className="bg-gradient-to-br from-pink-900/30 to-purple-900/30 border border-pink-500/30 rounded-lg p-8 shadow-lg hover:shadow-pink-500/30 transition">
                 <div className="flex items-center mb-4">
-                  <h3 className="font-['Press_Start_2P'] text-lg text-pink-400">For Freelancers</h3>
+                  <span className="text-2xl mr-3">🧑‍💻</span>
+                  <span className="font-['Press_Start_2P'] text-lg text-pink-400">For Freelancers</span>
                 </div>
-                <p className="font-['VT323'] text-xl">
-                  Guaranteed payments and objective evaluations, eliminating payment uncertainty.
-                </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ scale: 1.05 }}
-              >
+                <ul className="list-disc list-inside text-pink-100 font-['VT323'] text-lg space-y-1 pl-2">
+                  <li>Guaranteed, on-time payments</li>
+                  <li>Objective, AI-powered work reviews</li>
+                  <li>No more payment anxiety</li>
+                </ul>
+              </div>
+              {/* Clients */}
+              <div className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border border-cyan-500/30 rounded-lg p-8 shadow-lg hover:shadow-cyan-500/30 transition">
                 <div className="flex items-center mb-4">
-                  <h3 className="font-['Press_Start_2P'] text-lg text-pink-400">For Clients</h3>
+                  <span className="text-2xl mr-3">🧑‍💼</span>
+                  <span className="font-['Press_Start_2P'] text-lg text-cyan-400">For Clients</span>
                 </div>
-                <p className="font-['VT323'] text-xl">
-                  Work that matches expectations with lower dispute risk and transparent processes.
-                </p>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
-                variants={featureVariant}
-                whileHover={{ scale: 1.05 }}
-              >
+                <ul className="list-disc list-inside text-cyan-100 font-['VT323'] text-lg space-y-1 pl-2">
+                  <li>Work that matches your expectations</li>
+                  <li>Lower risk of disputes</li>
+                  <li>Transparent, fair process</li>
+                </ul>
+              </div>
+              {/* Validators */}
+              <div className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-500/30 rounded-lg p-8 shadow-lg hover:shadow-yellow-500/30 transition">
                 <div className="flex items-center mb-4">
-                  <h3 className="font-['Press_Start_2P'] text-lg text-pink-400">For Validators</h3>
+                  <span className="text-2xl mr-3">🧑‍⚖️</span>
+                  <span className="font-['Press_Start_2P'] text-lg text-yellow-400">For Validators</span>
                 </div>
-                <p className="font-['VT323'] text-xl">
-                  Earn rewards for fair and reputation-based dispute resolutions within the ecosystem.
-                </p>
-              </motion.div>
-            </motion.div>
-        </div>
+                <ul className="list-disc list-inside text-yellow-100 font-['VT323'] text-lg space-y-1 pl-2">
+                  <li>Earn rewards for fair dispute resolution</li>
+                  <li>Build your reputation in the ecosystem</li>
+                  <li>Help create a safer freelance world</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </section>
         
         {/* CTA Section */}
