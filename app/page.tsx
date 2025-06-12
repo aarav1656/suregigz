@@ -62,7 +62,7 @@ export default function Home() {
       transition: { duration: 1.5 }
     }
   };
-
+  
   const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -247,14 +247,15 @@ export default function Home() {
                   suregigz
                 </span>
               </motion.h1>
-
-              <motion.p
+              
+              <motion.p 
                 className="font-['VT323'] text-2xl md:text-3xl mt-6 max-w-3xl mx-auto leading-relaxed text-purple-100"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                A decentralized freelancing platform that rebuilds trust through smart contracts, AI evaluation, and ZK-based dispute resolution.
+               Freelance without fear on NEARProtocol
+
               </motion.p>
 
               <motion.div
@@ -296,9 +297,11 @@ export default function Home() {
                     animate={{ opacity: [1, 0.8, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <div className="text-green-400 mb-2">~ Smart Contract Created</div>
-                    <div className="text-purple-300 mb-2"> Client escrow funds locked: 1.5 ETH</div>
-                    <div className="text-cyan-400 mb-2"> Freelancer agreement confirmed</div>
+                    <div className="text-green-400 mb-2"> ~ 🔐 Smart contracts lock job terms & payments</div>
+                    <div className="text-purple-300 mb-2"> ~ 💰 Client escrow funds locked: 1.5 ETH</div>
+                    <div className="text-cyan-400 mb-2"> ~ 🤖 AI checks work for fairness</div>
+                    <div className="text-pink-400 mb-2"> ~ 🧑‍⚖️ Disputes solved by community & AI</div>
+                    <div className="text-yellow-400 mb-2"> ~ 💸 Payments released only when work is validated</div>
                     <div className="text-pink-400">
                       <motion.span
                         animate={{ opacity: [0, 1] }}
@@ -334,13 +337,14 @@ export default function Home() {
               viewport={{ once: true }}
               variants={fadeIn}
             >
-              <motion.h2
+              <motion.h2 
                 className="font-['Press_Start_2P'] text-2xl md:text-3xl text-red-500 mb-6"
                 whileHover={{ scale: 1.02 }}
+                
               >
-                ❌ Problem
+                ❌ Problems 
               </motion.h2>
-              <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto">
+              <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto ">
                 Traditional freelancing platforms face:
               </p>
             </motion.div>
@@ -366,7 +370,7 @@ export default function Home() {
                   whileHover={{ scale: 1.03 }}
                 >
                   <div className="font-['VT323'] text-xl flex items-start">
-                    <span className="text-red-500 mr-2">✗</span>
+                    <span className="text-red-400 text-2xl mr-3">{problemIcons[index]}</span>
                     <span>{problem}</span>
                   </div>
                 </motion.div>
@@ -397,138 +401,141 @@ export default function Home() {
                 </span> solves this with:
               </p>
             </motion.div>
-
-            <motion.div
+            
+            <motion.div 
               className="grid grid-cols-1 lg:grid-cols-2 gap-10"
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div
+              <motion.div 
                 className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🔐</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Attestation-Based Agreements</h3>
+                  <span className="text-2xl mr-3">🔐</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">No More Broken Promises</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Smart contracts define and store job terms, ensuring transparency and accountability.
+                <p className="font-['VT323'] text-xl mt-2">
+                  Every job has a smart contract. The rules and payment are locked in, so everyone knows what to expect.
                 </p>
               </motion.div>
-
-              <motion.div
+              
+              <motion.div 
                 className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🤖</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">AI-Powered Work Evaluation</h3>
+                  <span className="text-2xl mr-3">🤖</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">AI Checks the Work</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  AI compares submitted work with the job description, generating relevance scores for objective feedback.
+                <p className="font-['VT323'] text-xl mt-2">
+                  AI reviews the finished work and compares it to the job description, so feedback is fast and fair.
                 </p>
               </motion.div>
-
-              <motion.div
+              
+              <motion.div 
                 className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🧑‍⚖️</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Decentralized Dispute Resolution</h3>
+                  <span className="text-2xl mr-3">🧑‍⚖️</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Disputes? Solved Together</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Verified validators (proven via ZKPass) and AI jointly resolve disputes with fairness and transparency.
+                <p className="font-['VT323'] text-xl mt-2">
+                  If there's a disagreement, a group of trusted validators and AI review the case—no more one-sided decisions.
                 </p>
               </motion.div>
-
-              <motion.div
+              
+              <motion.div 
                 className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">💸</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Escrow-Backed Payments</h3>
+                  <span className="text-2xl mr-3">💸</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Payment is Always Safe</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Client payments are locked in escrow and released only when work is validated or disputes are resolved.
+                <p className="font-['VT323'] text-xl mt-2">
+                  Client's money is held in escrow and only released when the work is done right or a dispute is resolved.
                 </p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Benefits Section */}
         <section id="benefits" className="py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <motion.div 
               className="text-center mb-16"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeIn}
             >
-              <motion.h2
+              <motion.h2 
                 className="font-['Press_Start_2P'] text-2xl md:text-3xl text-yellow-400 mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                🌟 Benefits
+                <span role="img" aria-label="star">🌟</span> Benefits
               </motion.h2>
             </motion.div>
-
-            <motion.div
+            
+            <motion.div 
               className="grid grid-cols-1 md:grid-cols-3 gap-8"
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div
+              <motion.div 
                 className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="flex items-center mb-4">
-                  <h3 className="font-['Press_Start_2P'] text-lg text-pink-400">For Freelancers</h3>
+                  <span className="text-2xl mr-3">🧑‍💻</span>
+                  <span className="font-['Press_Start_2P'] text-lg text-pink-400">For Freelancers</span>
                 </div>
                 <p className="font-['VT323'] text-xl">
                   Guaranteed payments and objective evaluations, eliminating payment uncertainty.
                 </p>
               </motion.div>
-
-              <motion.div
+              
+              <motion.div 
                 className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="flex items-center mb-4">
-                  <h3 className="font-['Press_Start_2P'] text-lg text-pink-400">For Clients</h3>
+                  <span className="text-2xl mr-3">🧑‍💼</span>
+                  <span className="font-['Press_Start_2P'] text-lg text-cyan-400">For Clients</span>
                 </div>
                 <p className="font-['VT323'] text-xl">
                   Work that matches expectations with lower dispute risk and transparent processes.
                 </p>
               </motion.div>
-
-              <motion.div
+              
+              <motion.div 
                 className="bg-gradient-to-br from-yellow-900/30 to-purple-900/30 border border-yellow-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
                 variants={featureVariant}
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="flex items-center mb-4">
-                  <h3 className="font-['Press_Start_2P'] text-lg text-pink-400">For Validators</h3>
+                  <span className="text-2xl mr-3">🧑‍⚖️</span>
+                  <span className="font-['Press_Start_2P'] text-lg text-yellow-400">For Validators</span>
                 </div>
                 <p className="font-['VT323'] text-xl">
                   Earn rewards for fair and reputation-based dispute resolutions within the ecosystem.
                 </p>
               </motion.div>
             </motion.div>
-          </div>
+        </div>
         </section>
 
         {/* CTA Section */}
@@ -545,10 +552,10 @@ export default function Home() {
                 className="font-['Press_Start_2P'] text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                Join The Revolution
+                Join The Waitlist 
               </motion.h2>
               <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto">
-                Be among the first to experience the future of decentralized freelancing.
+              Get exclusive early access to a safer, smarter way to freelance.
               </p>
             </motion.div>
 
@@ -562,7 +569,7 @@ export default function Home() {
               <form onSubmit={handleEmailSubmit} className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-500/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm">
                 <div className="mb-4">
                   <label className="block font-['VT323'] text-xl mb-2" htmlFor="email">
-                    Your Email
+                    Email
                   </label>
                   <input
                     type="email"
@@ -587,7 +594,6 @@ export default function Home() {
                     <option value="freelancer">Freelancer</option>
                     <option value="client">Client</option>
                     <option value="validator">Validator</option>
-                    <option value="other">Other</option>
                   </select>
                 </div>
 
@@ -658,7 +664,7 @@ export default function Home() {
                 suregigz
               </div>
               <div className="font-['VT323'] text-lg mt-2 text-purple-300">
-                Decentralized Freelancing Platform
+              freelance without fear on NEARProtocol
               </div>
             </motion.div>
             <motion.div
