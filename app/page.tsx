@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { motion, Variants } from 'framer-motion';
+import { ConnectWallet } from './components/wallet/ConnectWallet';
 
 export default function Home() {
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false);
@@ -203,13 +204,7 @@ export default function Home() {
 
               {/* Connect Wallet Button */}
               <div className="hidden md:block">
-                <motion.button
-                  className="font-['Press_Start_2P'] text-sm px-6 py-2 rounded-md bg-gradient-to-r from-cyan-600 to-purple-600 text-white shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-cyan-500/30"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Connect Wallet
-                </motion.button>
+                <ConnectWallet />
               </div>
 
               {/* Mobile Menu Button (for future mobile menu implementation) */}

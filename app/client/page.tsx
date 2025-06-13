@@ -19,7 +19,6 @@ export default function ClientRegister() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Client Registration Data:", formData);
-    // You can integrate your backend or smart contract logic here
   };
 
   return (
