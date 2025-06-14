@@ -64,6 +64,14 @@ export default function Home() {
     }
   };
 
+  const problemIcons = [
+    "📦", // Mismatched expectations on deliverables
+    "⚖️", // Unfair dispute handling
+    "💸", // Payment insecurity for freelancers
+    "🕵️‍♂️", // Difficulty verifying professional expertise
+    "🏢", // Centralized arbitration with low transparency
+  ];
+
   const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -324,25 +332,25 @@ export default function Home() {
         {/* Problem Section */}
         <section className="py-12 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <motion.div 
               className="text-center mb-16"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeIn}
             >
-              <motion.h2
-                className="font-['Press_Start_2P'] text-2xl md:text-3xl text-red-500 mb-6"
+              <motion.h2 
+                className="font-['Press_Start_2P'] text-4xl md:text-3xl text-red-500 mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                ❌ Problem
+                ❌ Problems
               </motion.h2>
               <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto">
                 Traditional freelancing platforms face:
               </p>
             </motion.div>
-
-            <motion.div
+            
+            <motion.div 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={staggerContainer}
               initial="hidden"
@@ -356,14 +364,14 @@ export default function Home() {
                 "Difficulty verifying professional expertise",
                 "Centralized arbitration with low transparency"
               ].map((problem, index) => (
-                <motion.div
+                <motion.div 
                   key={index}
                   className="bg-gradient-to-br from-red-900/30 to-purple-900/30 border border-red-700/30 rounded-lg p-6 backdrop-filter backdrop-blur-sm"
                   variants={featureVariant}
                   whileHover={{ scale: 1.03 }}
                 >
                   <div className="font-['VT323'] text-xl flex items-start">
-                    <span className="text-red-500 mr-2">✗</span>
+                    <span className="text-red-400 text-2xl mr-3">{problemIcons[index]}</span>
                     <span>{problem}</span>
                   </div>
                 </motion.div>
@@ -403,57 +411,57 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <motion.div
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
+                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🔐</span>
-                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Attestation-Based Agreements</h3>
+                  <span className="text-2xl mr-3">🔐</span>
+                  <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">No More Broken Promises</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
-                  Smart contracts define and store job terms, ensuring transparency and accountability.
+                <p className="font-['VT323'] text-xl mt-2">
+                  Every job has a smart contract. The rules and payment are locked in, so everyone knows what to expect.
                 </p>
               </motion.div>
 
               <motion.div
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
+                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🤖</span>
+                  <span className="text-2xl mr-3">🤖</span>
                   <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">AI-Powered Work Evaluation</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
+                <p className="font-['VT323'] text-xl mt-2">
                   AI compares submitted work with the job description, generating relevance scores for objective feedback.
                 </p>
               </motion.div>
 
               <motion.div
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
+                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">🧑‍⚖️</span>
+                  <span className="text-2xl mr-3">🧑‍⚖️</span>
                   <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Decentralized Dispute Resolution</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
+                <p className="font-['VT323'] text-xl mt-2">
                   Verified validators (proven via ZKPass) and AI jointly resolve disputes with fairness and transparency.
                 </p>
               </motion.div>
 
               <motion.div
-                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8 backdrop-filter backdrop-blur-sm"
+                className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 border border-purple-700/30 rounded-lg p-8"
                 variants={featureVariant}
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-4">💸</span>
+                  <span className="text-2xl mr-3">💸</span>
                   <h3 className="font-['Press_Start_2P'] text-lg text-cyan-400">Escrow-Backed Payments</h3>
                 </div>
-                <p className="font-['VT323'] text-xl mt-4">
+                <p className="font-['VT323'] text-xl mt-2">
                   Client payments are locked in escrow and released only when work is validated or disputes are resolved.
                 </p>
               </motion.div>
@@ -464,20 +472,14 @@ export default function Home() {
         {/* Benefits Section */}
         <section id="benefits" className="py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-60 backdrop-filter backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              className="text-center mb-16"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-            >
-              <motion.h2
-                className="font-['Press_Start_2P'] text-2xl md:text-3xl text-yellow-400 mb-6"
+            <div className="text-center mb-16">
+              <motion.h2 
+                className="font-['Press_Start_2P'] text-3xl md:text-4xl bg-gradient-to-r from-yellow-400 to-pink-400 text-transparent bg-clip-text drop-shadow-lg mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                🌟 Benefits
+                <span role="img" aria-label="star">🌟</span> Benefits
               </motion.h2>
-            </motion.div>
+            </div>
 
             <motion.div
               className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -531,24 +533,24 @@ export default function Home() {
         {/* CTA Section */}
         <section id="join" className="py-20 px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-4xl mx-auto relative z-10">
-            <motion.div
+            <motion.div 
               className="text-center mb-12"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeIn}
             >
-              <motion.h2
+              <motion.h2 
                 className="font-['Press_Start_2P'] text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                Join The Revolution
+                Join The Waitlist
               </motion.h2>
               <p className="font-['VT323'] text-xl md:text-2xl max-w-3xl mx-auto">
-                Be among the first to experience the future of decentralized freelancing.
+                Get exclusive early access to a safer, smarter way to freelance.
               </p>
             </motion.div>
-
+            
             <motion.div
               className="max-w-md mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -641,11 +643,11 @@ export default function Home() {
             }}
           />
         </section>
-
+        
         {/* Footer */}
         <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-purple-700/30">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <motion.div
+            <motion.div 
               className="mb-6 md:mb-0"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -655,7 +657,8 @@ export default function Home() {
                 suregigz
               </div>
               <div className="font-['VT323'] text-lg mt-2 text-purple-300">
-                freelance without fear on NEARProtocol              </div>
+                freelance without fear on NEARProtocol
+              </div>
             </motion.div>
             <motion.div
               className="flex space-x-6"
