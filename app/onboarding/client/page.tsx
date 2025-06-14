@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useWallet } from '../../lib/wallet/WalletContext';
 
 export default function ClientOnboarding() {
   const router = useRouter();
-  const { accountId } = useWallet();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',

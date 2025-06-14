@@ -2,18 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useWallet } from '../lib/wallet/WalletContext';
-import { useEffect } from 'react';
 
 export default function Onboarding() {
   const router = useRouter();
-  const { isConnected } = useWallet();
-
-  // useEffect(() => {
-  //   if (!isConnected) {
-  //     router.push('/');
-  //   }
-  // }, [isConnected, router]);
 
   const handleSelection = (type: 'client' | 'worker') => {
     router.push(`/onboarding/${type}`);

@@ -29,7 +29,7 @@ export default function Home() {
     }
   };
 
-  const featureVariant = {
+  const featureVariant: Variants = {
     hidden: { opacity: 0, x: -50 },
     visible: {
       opacity: 1,
