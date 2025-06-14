@@ -249,7 +249,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                A decentralized freelancing platform that rebuilds trust through smart contracts, AI evaluation, and ZK-based dispute resolution.
+                Freelance without fear on NEARProtocol
               </motion.p>
 
               <motion.div
@@ -291,9 +291,11 @@ export default function Home() {
                     animate={{ opacity: [1, 0.8, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    <div className="text-green-400 mb-2">~ Smart Contract Created</div>
-                    <div className="text-purple-300 mb-2"> Client escrow funds locked: 1.5 ETH</div>
-                    <div className="text-cyan-400 mb-2"> Freelancer agreement confirmed</div>
+                    <div className="text-green-400 mb-2"> ~ 🔐 Smart contracts lock job terms & payments</div>
+                    <div className="text-purple-300 mb-2"> ~ 💰 Client escrow funds locked: 1.5 ETH</div>
+                    <div className="text-cyan-400 mb-2"> ~ 🤖 AI checks work for fairness</div>
+                    <div className="text-pink-400 mb-2"> ~ 🧑‍⚖️ Disputes solved by community & AI</div>
+                    <div className="text-yellow-400 mb-2"> ~ 💸 Payments released only when work is validated</div>
                     <div className="text-pink-400">
                       <motion.span
                         animate={{ opacity: [0, 1] }}
@@ -588,8 +590,8 @@ export default function Home() {
 
                 {submitMessage && (
                   <div className={`mb-4 p-3 rounded font-['VT323'] text-lg ${isEmailSubmitted
-                      ? 'bg-green-900/30 border border-green-500/30 text-green-400'
-                      : 'bg-red-900/30 border border-red-500/30 text-red-400'
+                    ? 'bg-green-900/30 border border-green-500/30 text-green-400'
+                    : 'bg-red-900/30 border border-red-500/30 text-red-400'
                     }`}>
                     {submitMessage}
                   </div>
@@ -653,8 +655,7 @@ export default function Home() {
                 suregigz
               </div>
               <div className="font-['VT323'] text-lg mt-2 text-purple-300">
-                Decentralized Freelancing Platform
-              </div>
+                freelance without fear on NEARProtocol              </div>
             </motion.div>
             <motion.div
               className="flex space-x-6"
