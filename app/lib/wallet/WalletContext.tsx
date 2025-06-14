@@ -30,7 +30,8 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setModal(modal);
 
       // Get initial account if already connected
-      const accounts = await selector.getAccounts();
+      const wallet = await selector.wallet();
+      const accounts = await wallet.getAccounts();
       if (accounts.length > 0) {
         setAccountId(accounts[0].accountId);
       }
