@@ -136,7 +136,6 @@ export default function Home() {
       <Head>
         <title>suregigz - Decentralized Freelancing Platform</title>
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
       </Head>
 
       {/* Grid Background */}
