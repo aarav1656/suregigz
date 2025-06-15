@@ -1,11 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
-import clientPromise from '@/app/lib/mongodb';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 interface WaitlistEntry {
   id: string;
   email: string;
   role: string;
   timestamp: string;
+}
+
+// Use /tmp directory for Vercel serverless environment
+const WAITLIST_FILE = path.join('/tmp', 'waitlist.json');
+
+// Ensure data directory exists
+async function ensureDataDir() {
+  const dataDir = '/tmp';
+  try {
+    await fs.access(dataDir);
+  } catch {
+    await fs.mkdir(dataDir, { recursive: true });
+  }
+}
+
+// Read existing waitlist data
+async function readWaitlist(): Promise<WaitlistEntry[]> {
+  try {
+    const data = await fs.readFile(WAITLIST_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
+}
+
+// Write waitlist data
+async function writeWaitlist(data: WaitlistEntry[]): Promise<void> {
+  await ensureDataDir();
+  await fs.writeFile(WAITLIST_FILE, JSON.stringify(data, null, 2));
 }
 
 export async function POST(request: NextRequest) {
@@ -20,13 +50,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Connect to MongoDB
-    const client = await clientPromise;
-    const db = client.db('suregigz');
-    const waitlist = db.collection('waitlist');
+    // Read existing data
+    const waitlist = await readWaitlist();
 
     // Check if email already exists
-    const existingEntry = await waitlist.findOne({ email });
+    const existingEntry = waitlist.find(entry => entry.email === email);
     if (existingEntry) {
       return NextResponse.json(
         { error: 'Email already registered' },
@@ -42,8 +70,11 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     };
 
-    // Insert into MongoDB
-    await waitlist.insertOne(newEntry);
+    // Add to waitlist
+    waitlist.push(newEntry);
+
+    // Save updated waitlist
+    await writeWaitlist(waitlist);
 
     return NextResponse.json(
       { message: 'Successfully added to waitlist', id: newEntry.id },
@@ -71,17 +102,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Connect to MongoDB
-    const client = await clientPromise;
-    const db = client.db('suregigz');
-    const waitlist = db.collection('waitlist');
-
-    // Get all entries
-    const entries = await waitlist.find({}).toArray();
-    
+    const waitlist = await readWaitlist();
     return NextResponse.json({ 
-      count: entries.length, 
-      entries 
+      count: waitlist.length, 
+      entries: waitlist 
     });
   } catch (error) {
     console.error('Error reading waitlist:', error);
@@ -90,4 +114,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}
