@@ -24,6 +24,8 @@
     "@near-wallet-selector/nightly-connect": "^8.7.0",
     "@near-wallet-selector/sender": "^9.0.2",
     "@near-wallet-selector/wallet-connect": "^9.0.2",
+    "@supabase/supabase-js": "^2.50.0",
+    "@vercel/postgres": "^0.10.0",
     "eventemitter3": "^5.0.1",
     "framer-motion": "^12.18.1",
     "isomorphic-ws": "^5.0.0",
