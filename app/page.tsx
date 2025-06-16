@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import { motion, Variants } from 'framer-motion';
 import { ConnectWallet } from './components/wallet/ConnectWallet';
+import { WaitlistModal } from './components/WaitlistModal';
 
 export default function Home() {
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -91,25 +93,21 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        // Try to get error message from response
         let errorMessage = 'Something went wrong. Please try again.';
         try {
           const errorData = await response.json();
           errorMessage = errorData.error || errorMessage;
         } catch {
-          // If can't parse JSON, use status text
           errorMessage = `Server error: ${response.status} ${response.statusText}`;
         }
         setSubmitMessage(errorMessage);
         return;
       }
 
-      // Parse successful response - handle potential JSON parsing errors
       try {
         await response.json();
       } catch (jsonError) {
         console.warn('Response was successful but JSON parsing failed:', jsonError);
-        // Still treat as success since the HTTP response was OK
       }
 
       setIsEmailSubmitted(true);
@@ -118,11 +116,11 @@ export default function Home() {
       setTimeout(() => {
         setIsEmailSubmitted(false);
         setSubmitMessage('');
+        setIsModalOpen(false);
       }, 5000);
 
     } catch (error) {
       console.error('Error submitting form:', error);
-      // More specific error handling
       if (error instanceof TypeError && error.message.includes('fetch')) {
         setSubmitMessage('Unable to connect to server. Please check your internet connection.');
       }
@@ -130,6 +128,9 @@ export default function Home() {
       setIsSubmitting(false);
     }
   };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -188,24 +189,27 @@ export default function Home() {
               {/* Center Navigation Links */}
               <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
                 <div className="flex items-baseline space-x-8">
-                  <motion.a href=""
+                  <motion.button
+                    onClick={openModal}
                     className="font-['VT323'] text-xl hover:text-pink-400 px-3 py-2"
                     whileHover={{ scale: 1.05 }}
                   >
                     Your Gigs
-                  </motion.a>
-                  <motion.a href=""
+                  </motion.button>
+                  <motion.button
+                    onClick={openModal}
                     className="font-['VT323'] text-xl hover:text-pink-400 px-3 py-2"
                     whileHover={{ scale: 1.05 }}
                   >
                     Post a Gig
-                  </motion.a>
-                  <motion.a href="#join"
+                  </motion.button>
+                  <motion.button
+                    onClick={openModal}
                     className="font-['VT323'] text-xl hover:text-pink-400 px-3 py-2"
                     whileHover={{ scale: 1.05 }}
                   >
                     Find a Gig
-                  </motion.a>
+                  </motion.button>
                 </div>
               </div>
 
@@ -266,6 +270,7 @@ export default function Home() {
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
                 <motion.button
+                  onClick={openModal}
                   className="font-['Press_Start_2P'] text-sm sm:text-base px-8 py-3 rounded-md bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -694,6 +699,16 @@ export default function Home() {
           </div>
         </footer>
       </div>
+
+      {/* Waitlist Modal */}
+      <WaitlistModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onSubmit={handleEmailSubmit}
+        isSubmitting={isSubmitting}
+        isEmailSubmitted={isEmailSubmitted}
+        submitMessage={submitMessage}
+      />
     </div>
   );
 }
