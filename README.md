@@ -1,8 +1,14 @@
-## Deplyed Contract: https://testnet.nearblocks.io/txns/EqTMeTZ6ZasYQdDHP7TNRcJcJ7jmA9smsDQYL9ifFFLF
-
 # 🚀 suregigz
 
 **suregigz** is a decentralized freelancing platform that rebuilds trust between clients and freelancers through smart contracts, AI evaluation, and ZK-based dispute resolution.
+
+---
+
+## 🔗 Deployed Contract
+
+**Contract Address:** [testnet.nearblocks.io/txns/EqTMeTZ6ZasYQdDHP7TNRcJcJ7jmA9smsDQYL9ifFFLF](https://testnet.nearblocks.io/txns/EqTMeTZ6ZasYQdDHP7TNRcJcJ7jmA9smsDQYL9ifFFLF)
+
+**Network:** NEAR Testnet
 
 ---
 
