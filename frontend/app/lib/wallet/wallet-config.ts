@@ -14,12 +14,18 @@ export const setupWallet = async () => {
   const selector = await setupWalletSelector({
     network: "testnet",
     modules: [
-      setupMyNearWallet() ,
-      setupMeteorWallet() ,
-      setupSender() ,
-      setupHereWallet() ,
-      setupMathWallet() ,
-      setupLedger() ,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setupMyNearWallet() as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setupMeteorWallet() as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setupSender() as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setupHereWallet() as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setupMathWallet() as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setupLedger() as any,
       setupWalletConnect({
         projectId: "YOUR_PROJECT_ID", // Replace with your WalletConnect project ID
         metadata: {
@@ -28,7 +34,8 @@ export const setupWallet = async () => {
           url: "https://suregigz.com",
           icons: ["https://suregigz.com/icon.png"],
         },
-      }) ,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      }) as any,
     ],
   });
 
