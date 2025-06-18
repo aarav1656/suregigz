@@ -6,6 +6,7 @@ import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMathWallet } from "@near-wallet-selector/math-wallet";
 import { setupLedger } from "@near-wallet-selector/ledger";
 import { setupWalletConnect } from "@near-wallet-selector/wallet-connect";
+import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 
 export const CONTRACT_ID = "test.testnet"; // Replace with your contract ID
 
@@ -13,11 +14,12 @@ export const setupWallet = async () => {
   const selector = await setupWalletSelector({
     network: "testnet",
     modules: [
-      setupMyNearWallet(),
-      setupSender(),
-      setupHereWallet(),
-      setupMathWallet(),
-      setupLedger(),
+      setupMyNearWallet() ,
+      setupMeteorWallet() ,
+      setupSender() ,
+      setupHereWallet() ,
+      setupMathWallet() ,
+      setupLedger() ,
       setupWalletConnect({
         projectId: "YOUR_PROJECT_ID", // Replace with your WalletConnect project ID
         metadata: {
@@ -26,7 +28,7 @@ export const setupWallet = async () => {
           url: "https://suregigz.com",
           icons: ["https://suregigz.com/icon.png"],
         },
-      }),
+      }) ,
     ],
   });
 

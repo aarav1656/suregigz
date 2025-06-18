@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { motion, Variants } from 'framer-motion';
-import { ConnectWallet } from './components/wallet/ConnectWallet';
 import { WaitlistModal } from './components/WaitlistModal';
 
 export default function Home() {
@@ -58,13 +57,13 @@ export default function Home() {
     }
   };
 
-  const gridVariant = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 1.5 }
-    }
-  };
+  // const gridVariant = {
+  //   hidden: { opacity: 0 },
+  //   visible: {
+  //     opacity: 1,
+  //     transition: { duration: 1.5 }
+  //   }
+  // };
 
   const problemIcons = [
     "📦", // Mismatched expectations on deliverables

@@ -14,14 +14,15 @@
 //! [`root`][EscrowInternal::root], make sure you don't accidentally collide
 //! these storage entries in your contract. You can change the key this is
 //! stored under by providing `storage_key` to the macro.
-use crate::{event, standard::nep297::Event};
-use crate::{slot::Slot, DefaultStorageKey};
+use near_sdk_contract_tools::{event, slot::Slot, DefaultStorageKey, standard::nep297::Event, Escrow, escrow};
+use near_sdk_contract_tools::escrow::{Escrow as EscrowTrait, EscrowInternal as EscrowInternalTrait};
 use near_sdk::{
     borsh::{BorshDeserialize, BorshSerialize},
     env::panic_str,
     require,
     serde::Serialize,
     BorshStorageKey,
+    near, PanicOnDefault,
 };
 
 const ESCROW_ALREADY_LOCKED_MESSAGE: &str = "Already locked";
@@ -38,8 +39,7 @@ enum StorageKey<'a, T> {
 #[event(
     standard = "x-escrow",
     version = "1.0.0",
-    crate = "crate",
-    macros = "crate"
+    crate = "near_sdk_contract_tools"
 )]
 pub struct Lock<Id: Serialize, State: Serialize> {
     /// The identifier for a lock.
@@ -171,6 +171,46 @@ where
     }
 }
 
+/// Main contract implementation
+#[derive(Escrow, PanicOnDefault)]
+#[escrow(id = "u64", state = "bool", crate = "crate")]
+#[near(contract_state)]
+pub struct SureGigzContract {}
+
+#[near]
+impl SureGigzContract {
+    #[init]
+    pub fn new() -> Self {
+        Self {}
+    }
+
+    /// Lock a gig with the given ID and state
+    pub fn lock_gig(&mut self, id: u64, state: bool) {
+        self.lock(&id, &state);
+        Lock {
+            id,
+            locked: Some(state),
+        }
+        .emit();
+    }
+
+    /// Unlock a gig with the given ID if the condition is met
+    pub fn unlock_gig(&mut self, id: u64, condition: bool) {
+        self.unlock(&id, |_state| condition);
+        Lock::<u64, bool> { id, locked: None }.emit();
+    }
+
+    /// Check if a gig is locked
+    pub fn is_gig_locked(&self, id: u64) -> bool {
+        self.is_locked(&id)
+    }
+
+    /// Get the locked state of a gig
+    pub fn get_gig_state(&self, id: u64) -> Option<bool> {
+        self.get_locked(&id)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::Escrow;
@@ -179,7 +219,7 @@ mod tests {
         near, test_utils::VMContextBuilder, testing_env, AccountId, NearToken, PanicOnDefault,
         VMContext,
     };
-    use near_sdk_contract_tools_macros::Escrow;
+    use near_sdk_contract_tools::Escrow;
 
     const ID: u64 = 1;
     const IS_NOT_READY: bool = false;
