@@ -31,7 +31,7 @@ export const setupWallet = async () => {
         metadata: {
           name: "SureGigz",
           description: "Your trusted platform for gigs",
-          url: "https://suregigz.com",
+          url: "https://suregigz-cwut.vercel.app/",
           icons: ["https://suregigz.com/icon.png"],
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
