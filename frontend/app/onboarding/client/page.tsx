@@ -6,22 +6,50 @@ import { motion } from 'framer-motion';
 
 export default function ClientOnboarding() {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     companyName: '',
-    companySize: '',
     industry: '',
+    projectDescription: '',
+    budget: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Add form submission logic
-    console.log('Form submitted:', formData);
-    router.push('/dashboard'); // Redirect to dashboard after submission
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      console.log('Submitting form data:', formData);
+      const response = await fetch('/api/client', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log('Response:', data);
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create client profile');
+      }
+
+      console.log('Profile created:', data);
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Error creating profile:', error);
+      setError(error instanceof Error ? error.message : 'Failed to create profile');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -40,8 +68,14 @@ export default function ClientOnboarding() {
             Client Onboarding
           </h1>
           <p className="text-gray-300 mb-8 text-center">
-            Complete your profile to start posting gigs
+            Complete your profile to start posting projects
           </p>
+
+          {error && (
+            <div className="bg-red-500/10 border border-red-500 text-red-500 px-4 py-2 rounded-lg mb-6">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -69,33 +103,14 @@ export default function ClientOnboarding() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Company Name</label>
+              <label className="block text-sm font-medium mb-2">Company Name (Optional)</label>
               <input
                 type="text"
                 name="companyName"
                 value={formData.companyName}
                 onChange={handleChange}
-                required
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-cyan-500/30 focus:border-cyan-500/50 focus:outline-none"
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">Company Size</label>
-              <select
-                name="companySize"
-                value={formData.companySize}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-cyan-500/30 focus:border-cyan-500/50 focus:outline-none"
-              >
-                <option value="">Select company size</option>
-                <option value="1-10">1-10 employees</option>
-                <option value="11-50">11-50 employees</option>
-                <option value="51-200">51-200 employees</option>
-                <option value="201-500">201-500 employees</option>
-                <option value="501+">501+ employees</option>
-              </select>
             </div>
 
             <div>
@@ -107,6 +122,33 @@ export default function ClientOnboarding() {
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-cyan-500/30 focus:border-cyan-500/50 focus:outline-none"
+                placeholder="e.g., Technology, Healthcare, Education"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Project Description</label>
+              <textarea
+                name="projectDescription"
+                value={formData.projectDescription}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-cyan-500/30 focus:border-cyan-500/50 focus:outline-none"
+                placeholder="Describe your project requirements..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Budget (USD)</label>
+              <input
+                type="number"
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                required
+                min="0"
+                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-cyan-500/30 focus:border-cyan-500/50 focus:outline-none"
               />
             </div>
 
@@ -114,9 +156,10 @@ export default function ClientOnboarding() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold hover:from-cyan-500 hover:to-purple-500 transition-all"
+              disabled={isSubmitting}
+              className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold hover:from-cyan-500 hover:to-purple-500 transition-all disabled:opacity-50"
             >
-              Complete Profile
+              {isSubmitting ? 'Creating Profile...' : 'Complete Profile'}
             </motion.button>
           </form>
         </motion.div>
