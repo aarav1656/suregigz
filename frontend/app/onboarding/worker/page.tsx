@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 
 export default function WorkerOnboarding() {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -17,9 +19,34 @@ export default function WorkerOnboarding() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Add form submission logic
-    console.log('Form submitted:', formData);
-    router.push('/dashboard'); // Redirect to dashboard after submission
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      console.log('Submitting form data:', formData);
+      const response = await fetch('/api/worker', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log('Response:', data);
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create worker profile');
+      }
+
+      console.log('Profile created:', data);
+      router.push('/dashboard');
+    } catch (error) {
+      console.error('Error creating profile:', error);
+      setError(error instanceof Error ? error.message : 'Failed to create profile');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -38,11 +65,17 @@ export default function WorkerOnboarding() {
           className="max-w-2xl mx-auto"
         >
           <h1 className="text-4xl font-bold mb-8 text-center font-['Press_Start_2P']">
-            Worker Onboarding
+            Employee Onboarding
           </h1>
           <p className="text-gray-300 mb-8 text-center">
             Complete your profile to start finding gigs
           </p>
+
+          {error && (
+            <div className="bg-red-500/10 border border-red-500 text-red-500 px-4 py-2 rounded-lg mb-6">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -130,9 +163,10 @@ export default function WorkerOnboarding() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold hover:from-cyan-500 hover:to-purple-500 transition-all"
+              disabled={isSubmitting}
+              className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold hover:from-cyan-500 hover:to-purple-500 transition-all disabled:opacity-50"
             >
-              Complete Profile
+              {isSubmitting ? 'Creating Profile...' : 'Complete Profile'}
             </motion.button>
           </form>
         </motion.div>

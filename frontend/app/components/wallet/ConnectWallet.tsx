@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useWallet } from '@/frontend/app/lib/wallet/WalletContext';
+import { useWallet } from '@/app/lib/wallet/WalletContext';
 
 export const ConnectWallet: React.FC = () => {
   const router = useRouter();
