@@ -40,6 +40,10 @@ export default function WorkerOnboarding() {
       }
 
       console.log('Profile created:', data);
+      
+      // Save profile data to localStorage for dashboard display
+      localStorage.setItem('workerProfile', JSON.stringify(formData));
+      
       router.push('/dashboard');
     } catch (error) {
       console.error('Error creating profile:', error);
