@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const gigs = [
   {
@@ -43,36 +44,37 @@ export default function GigsPage() {
         </h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {gigs.map((gig) => (
-            <motion.div
-              key={gig.id}
-              whileHover={{ scale: 1.03 }}
-              className="bg-gray-800 rounded-2xl shadow-lg border border-cyan-500/30 overflow-hidden flex flex-col"
-            >
-              <div className="relative h-48 w-full">
-                <Image
-                  src={gig.image}
-                  alt={gig.title}
-                  fill
-                  className="object-cover w-full h-full"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  priority={true}
-                />
-              </div>
-              <div className="flex-1 flex flex-col p-6">
-                <h2 className="text-2xl font-bold mb-2 font-['Press_Start_2P'] text-cyan-300">
-                  {gig.title}
-                </h2>
-                <p className="text-gray-300 mb-4 flex-1">{gig.description}</p>
-                <div className="flex items-center justify-between mt-auto">
-                  <span className="text-lg font-semibold text-purple-400">
-                    ${gig.pay}
-                  </span>
-                  <button className="px-5 py-2 rounded-lg bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold hover:from-cyan-500 hover:to-purple-500 transition-colors font-['Press_Start_2P'] text-xs">
-                    View & Apply
-                  </button>
+            <Link key={gig.id} href={`/gigs/${gig.id}`} className="block">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                className="bg-gray-800 rounded-2xl shadow-lg border border-cyan-500/30 overflow-hidden flex flex-col cursor-pointer transition-all"
+              >
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={gig.image}
+                    alt={gig.title}
+                    fill
+                    className="object-cover w-full h-full"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority={true}
+                  />
                 </div>
-              </div>
-            </motion.div>
+                <div className="flex-1 flex flex-col p-6">
+                  <h2 className="text-2xl font-bold mb-2 font-['Press_Start_2P'] text-cyan-300">
+                    {gig.title}
+                  </h2>
+                  <p className="text-gray-300 mb-4 flex-1">{gig.description}</p>
+                  <div className="flex items-center justify-between mt-auto">
+                    <span className="text-lg font-semibold text-purple-400">
+                      ${gig.pay}
+                    </span>
+                    <span className="px-5 py-2 rounded-lg bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold hover:from-cyan-500 hover:to-purple-500 transition-colors font-['Press_Start_2P'] text-xs">
+                      View & Apply
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
