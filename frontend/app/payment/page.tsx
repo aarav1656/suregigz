@@ -45,8 +45,17 @@ export default function PaymentPage() {
       // Here you would integrate with actual payment APIs
       console.log("Processing payment:", formData);
       
-      // Show success message
-      alert("Payment processed successfully!");
+      // Save payment data to localStorage for invoice
+      const paymentData = {
+        ...formData,
+        id: Date.now(),
+        date: new Date().toISOString(),
+        status: "completed"
+      };
+      localStorage.setItem("lastPayment", JSON.stringify(paymentData));
+      
+      // Redirect to invoice page
+      window.location.href = "/payment/invoice";
       
     } catch (error) {
       setError("Payment failed. Please try again.");
