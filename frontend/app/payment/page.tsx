@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 interface PaymentFormData {
   developerName: string;
@@ -36,7 +35,6 @@ export default function PaymentPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
-    setError("");
 
     try {
       // Simulate payment processing
@@ -57,8 +55,12 @@ export default function PaymentPage() {
       // Redirect to invoice page
       window.location.href = "/payment/invoice";
       
-    } catch (error) {
-      setError("Payment failed. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Payment failed. Please try again.");
+      }
     } finally {
       setIsProcessing(false);
     }
@@ -96,7 +98,6 @@ export default function PaymentPage() {
                 {error}
               </div>
             )}
-
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Developer Information */}
               <div className="grid md:grid-cols-2 gap-4">

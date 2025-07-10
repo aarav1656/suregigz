@@ -3,21 +3,40 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+type ClientProfile = {
+  fullName: string;
+  email: string;
+  companyName?: string;
+  industry: string;
+  projectDescription: string;
+  budget: string;
+};
+
+type WorkerProfile = {
+  fullName: string;
+  email: string;
+  skills: string;
+  experience: string;
+  hourlyRate: string;
+  bio: string;
+};
+
+type Profile = (ClientProfile & { type: "client" }) | (WorkerProfile & { type: "worker" });
+
 const PROFILE_IMAGE = "https://randomuser.me/api/portraits/men/32.jpg"; // Hardcoded profile image
 
 export default function Dashboard() {
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [type, setType] = useState<string | null>(null);
 
   useEffect(() => {
-    // Try to get the last submitted onboarding data from localStorage
     const client = localStorage.getItem("clientProfile");
     const worker = localStorage.getItem("workerProfile");
     if (worker) {
-      setProfile(JSON.parse(worker));
+      setProfile({ ...JSON.parse(worker), type: "worker" });
       setType("worker");
     } else if (client) {
-      setProfile(JSON.parse(client));
+      setProfile({ ...JSON.parse(client), type: "client" });
       setType("client");
     }
   }, []);
@@ -58,36 +77,36 @@ export default function Dashboard() {
             {type === "client" ? (
               <>
                 <div>
-                  <span className="font-semibold text-cyan-300">Company Name:</span> {profile.companyName || <span className="text-gray-400">N/A</span>}
+                  <span className="font-semibold text-cyan-300">Company Name:</span> {(profile as ClientProfile).companyName || <span className="text-gray-400">N/A</span>}
                 </div>
                 <div>
-                  <span className="font-semibold text-cyan-300">Industry:</span> {profile.industry}
+                  <span className="font-semibold text-cyan-300">Industry:</span> {(profile as ClientProfile).industry}
                 </div>
                 <div>
                   <span className="font-semibold text-cyan-300">Project Description:</span>
                   <div className="bg-gray-900 rounded-lg p-3 mt-1 text-gray-200 text-sm">
-                    {profile.projectDescription}
+                    {(profile as ClientProfile).projectDescription}
                   </div>
                 </div>
                 <div>
-                  <span className="font-semibold text-cyan-300">Budget:</span> ${profile.budget}
+                  <span className="font-semibold text-cyan-300">Budget:</span> ${(profile as ClientProfile).budget}
                 </div>
               </>
             ) : (
               <>
                 <div>
-                  <span className="font-semibold text-cyan-300">Skills:</span> {profile.skills}
+                  <span className="font-semibold text-cyan-300">Skills:</span> {(profile as WorkerProfile).skills}
                 </div>
                 <div>
-                  <span className="font-semibold text-cyan-300">Experience:</span> {profile.experience} years
+                  <span className="font-semibold text-cyan-300">Experience:</span> {(profile as WorkerProfile).experience} years
                 </div>
                 <div>
-                  <span className="font-semibold text-cyan-300">Hourly Rate:</span> ${profile.hourlyRate}/hr
+                  <span className="font-semibold text-cyan-300">Hourly Rate:</span> ${(profile as WorkerProfile).hourlyRate}/hr
                 </div>
                 <div>
                   <span className="font-semibold text-cyan-300">Bio:</span>
                   <div className="bg-gray-900 rounded-lg p-3 mt-1 text-gray-200 text-sm">
-                    {profile.bio}
+                    {(profile as WorkerProfile).bio}
                   </div>
                 </div>
               </>

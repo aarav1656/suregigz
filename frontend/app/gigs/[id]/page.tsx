@@ -44,8 +44,9 @@ const gigs = [
   },
 ];
 
-export default function GigDetailPage({ params }: { params: { id: string } }) {
-  const gig = gigs.find((g) => g.id === Number(params.id));
+export default async function GigDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const gig = gigs.find((g) => g.id === Number(id));
   if (!gig) return notFound();
 
   return (

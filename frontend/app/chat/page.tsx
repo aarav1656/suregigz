@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { FaGithub, FaPaperPlane, FaMoneyCheckAlt } from "react-icons/fa";
 import { SiNear } from "react-icons/si";
 
@@ -18,13 +17,12 @@ const sampleMessages = [
   },
   {
     sender: "ai",
-    text: "Here's the latest commit: 'Add payment integration'. Would you like to review the code or make a payment?",
+    text: "Here&apos;s the latest commit: &apos;Add payment integration&apos;. Would you like to review the code or make a payment?",
     time: "09:02 AM",
   },
 ];
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState(sampleMessages);
   const [input, setInput] = useState("");
 
   return (
@@ -54,7 +52,7 @@ export default function ChatPage() {
             </div>
             <h1 className="text-3xl font-bold mb-2 font-['Press_Start_2P']">Hi Anshu</h1>
             <p className="text-gray-300 text-center mb-2">
-              I'm SureGigz AI. I can help you track your project, chat about progress, and handle payments.
+              I&apos;m SureGigz AI. I can help you track your project, chat about progress, and handle payments.
             </p>
             <span className="inline-block bg-cyan-700/20 text-cyan-300 px-3 py-1 rounded-full text-xs font-semibold mb-2">
               AI Project Assistant
@@ -63,7 +61,7 @@ export default function ChatPage() {
 
           {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto mb-6 bg-gray-900 rounded-xl p-6 border border-cyan-500/10 shadow-inner" style={{ minHeight: 300 }}>
-            {messages.map((msg, idx) => (
+            {sampleMessages.map((msg, idx) => (
               <div key={idx} className={`mb-6 flex ${msg.sender === "client" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-xs px-4 py-3 rounded-2xl shadow ${msg.sender === "ai" ? "bg-cyan-700/20 text-cyan-100" : "bg-purple-700/20 text-purple-100"}`}>
                   <div className="text-sm mb-1">{msg.text}</div>
@@ -103,7 +101,7 @@ export default function ChatPage() {
           </form>
         </div>
         <div className="text-center text-xs text-gray-400 mt-6">
-          SureGigz AI is your project assistant. You're responsible for your content and work, so be sure to check all responses.
+          SureGigz AI is your project assistant. You&apos;re responsible for your content and work, so be sure to check all responses.
         </div>
       </main>
     </div>
