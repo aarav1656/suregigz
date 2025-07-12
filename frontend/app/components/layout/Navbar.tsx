@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ConnectWallet } from '../wallet/ConnectWallet';
+import { NotificationButton } from '../notifications/NotificationButton';
 
 interface NavbarProps {
   onOpenModal: () => void;
@@ -50,9 +51,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
             </div>
           </div>
 
-          {/* Connect Wallet Button */}
-          <div className="hidden md:block">
+          {/* Right side buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             <ConnectWallet />
+            <NotificationButton />
+
           </div>
 
           {/* Mobile Menu Button */}
