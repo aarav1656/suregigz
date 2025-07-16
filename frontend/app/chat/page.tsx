@@ -1,3 +1,3 @@
 export default function ChatPage() {
-  return <div>Chat page coming soon.</div>;
+  return <div>adding this in next commit</div>;
 }
